@@ -1,0 +1,41 @@
+#!/bin/bash
+ 
+help(){
+	cat <<-EOF
+	*********** Options *************
+	c)A Command
+	i)Interval(sec)
+	n)Execution count
+	EOF
+	exit $1
+}
+ 
+INTERVAL=0
+CNT=1
+ 
+while getopts hc:i:n: OPT; do
+	case $OPT in
+		c)CMD="$OPTARG";;
+		i)INTERVAL="$OPTARG";;
+		n)CNT="$OPTARG";;
+		h)help 0;;
+		?)help 1;;
+	esac
+done
+ 
+if [ -z "$CMD" ]; then
+	echo "[ERROR] Command is not specified."
+	help 1
+fi
+ 
+LOG="${0##/}.log"
+exec_cmd(){ $@; }
+ 
+for i in $(seq 1 $CNT); do
+	echo "[$(date "+%T")][${CMD}]($i)">>"${LOG}"
+	(time exec_cmd "${CMD}") 2>>"${LOG}"
+	echo >>"${LOG}"
+	if [ $i -lt $CNT ]; then
+		sleep $INTERVAL
+	fi
+done
