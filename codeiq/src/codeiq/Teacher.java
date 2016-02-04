@@ -21,9 +21,7 @@ class Teacher {
 				.reversed());
 
 		System.out.println(ExamResult.getHeader());
-		for (final ExamResult result : results) {
-			System.out.println(result);
-		}
+		results.forEach(System.out::println);
 	}
 
 	private static List<ExamResult> toExamResult(List<String> lines) throws IOException {
