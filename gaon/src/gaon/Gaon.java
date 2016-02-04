@@ -63,8 +63,10 @@ public class Gaon extends Applet implements Runnable, MouseListener, MouseMotion
 	}
 
 	public void paint(Graphics g){
-		drawer.getGraphics().setColor(col);
-		drawer.getGraphics().drawOval(x, y, (int) (Math.random() * 500), (int) (Math.random() * 500));
+		Graphics dg = drawer.getGraphics();
+		dg.setColor(col);
+		dg.drawOval(x, y, (int) (Math.random() * 500), (int) (Math.random() * 500));
+
 		drawer.draw(g);
 
 		//ガオン出現
