@@ -1,4 +1,4 @@
-package codeiq;
+
 
 
 import java.io.BufferedReader;
