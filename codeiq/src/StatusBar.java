@@ -28,7 +28,7 @@ class StatusBar {
 		}
 
 		int progress = (int) Math.floor((current / all) * 100);
-		StringBuilder progressBar = new StringBuilder();
+		StringBuilder progressBar = new StringBuilder(progress);
 		for (int i = 0; i < progress; i++) {
 			progressBar.append(barStr);
 		}
