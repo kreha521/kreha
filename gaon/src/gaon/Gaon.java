@@ -1,14 +1,17 @@
 package gaon;
 import java.applet.Applet;
 import java.awt.BasicStroke;
-import java.awt.Graphics;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
 
 public class Gaon extends Applet implements Runnable, MouseListener, MouseMotionListener {
 	private static final long serialVersionUID = -9067656144594669347L;
@@ -27,7 +30,11 @@ public class Gaon extends Applet implements Runnable, MouseListener, MouseMotion
 
 	public void init(){
 		drawer = new GraphicsDrawer(this);
-		image = this.getImage(getDocumentBase(), "vanila.jpg");
+		try {
+			image = ImageIO.read(Gaon.class.getResource("vanila.jpg"));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 
 		addEventListner();
 
