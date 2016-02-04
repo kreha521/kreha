@@ -3,6 +3,7 @@ import java.applet.Applet;
 import java.awt.BasicStroke;
 import java.awt.Graphics;
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.event.MouseEvent;
@@ -88,7 +89,9 @@ public class Gaon extends Applet implements Runnable, MouseListener, MouseMotion
 		gaon_width = (int) (image.getWidth(this));
 
 		if(isHitGaon()){
-			drawer.getGraphics().drawString("ガオン", mouse_x, mouse_y);
+			Graphics dg = drawer.getGraphics();
+			dg.setFont(new Font("MS ゴシック", Font.BOLD, 40));;
+			dg.drawString("ガオン", mouse_x, mouse_y);
 		}
 	}
 
