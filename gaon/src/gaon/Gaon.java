@@ -26,6 +26,7 @@ public class Gaon extends Applet implements Runnable, MouseListener, MouseMotion
 
 	public void init(){
 		drawer = new GraphicsDrawer(this);
+		image = this.getImage(getDocumentBase(), "vanila.jpg");
 
 		addEventListner();
 
@@ -64,8 +65,8 @@ public class Gaon extends Applet implements Runnable, MouseListener, MouseMotion
 
 	public void run(){
 		while(true){
-			x = (int) (Math.random() * 750);
-			y = (int) (Math.random() * 550);
+			x = (int) (Math.random() * 800);
+			y = (int) (Math.random() * 800);
 			col = new Color((int) (Math.random() * 255), (int) (Math.random() * 255), (int) (Math.random() * 255));
 
 			try{
@@ -78,15 +79,13 @@ public class Gaon extends Applet implements Runnable, MouseListener, MouseMotion
 	}
 
 	public void gaon(Graphics g){
-		image = this.getImage(getDocumentBase(), "vanila.jpg");
-
 		g.drawImage(image, x, y, this);
 
 		gaon_x = x;
 		gaon_y = y;
 
-		gaon_height = (int)(image.getHeight(this));
-		gaon_width = (int)(image.getWidth(this));
+		gaon_height = (int) (image.getHeight(this));
+		gaon_width = (int) (image.getWidth(this));
 
 		if(isHitGaon()){
 			drawer.getGraphics().drawString("ガオン", mouse_x, mouse_y);
@@ -131,11 +130,7 @@ public class Gaon extends Applet implements Runnable, MouseListener, MouseMotion
 	}
 
 	public boolean isHitGaon() {
-		if(gaon_x <= mouse_x && mouse_x <= gaon_x + gaon_width){
-			if(gaon_y <= mouse_y && mouse_y <= gaon_y + gaon_height){
-				return true;
-			}
-		}
-		return false;
+		return (gaon_x <= mouse_x && mouse_x <= gaon_x + gaon_width
+			&& gaon_y <= mouse_y && mouse_y <= gaon_y + gaon_height);
 	}
 }
