@@ -1,4 +1,4 @@
-package game.gaon;
+package gaon;
 import java.applet.Applet;
 import java.awt.BasicStroke;
 import java.awt.Color;
@@ -12,8 +12,6 @@ import java.awt.event.MouseMotionListener;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
-
-import game.GraphicsDrawer;
 
 public class Gaon extends Applet implements Runnable, MouseListener, MouseMotionListener {
 	private static final long serialVersionUID = -9067656144594669347L;

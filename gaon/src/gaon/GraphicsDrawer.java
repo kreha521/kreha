@@ -1,4 +1,4 @@
-package game;
+package gaon;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -12,7 +12,7 @@ public class GraphicsDrawer extends Component {
 	private Graphics buffer;
 	private Component comp;
 
-	public GraphicsDrawer(Component comp){
+	public <T extends Component> GraphicsDrawer(Component comp){
 		this.comp = comp;
 		size = comp.getSize();
 		back = comp.createImage(size.width, size.height);
