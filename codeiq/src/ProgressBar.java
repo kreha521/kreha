@@ -22,7 +22,7 @@ class ProgressBar {
 		System.out.print(buildProgressBarStr(all, current, barStr));
 	}
 
-	private static String buildProgressBarStr(float all, float current, String barStr) {
+	public static String buildProgressBarStr(float all, float current, String barStr) {
 		if (current > all) {
 			return "invalid";
 		}
