@@ -8,21 +8,21 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
-class StatusBar {
+class ProgressBar {
 	public static void main(String[] args) throws IOException {
 		String[] argsIn = readInput(System.in).get(0).split(",");
 		float all = Float.parseFloat(argsIn[0]);
 		float current = Float.parseFloat(argsIn[1]);
 		String barStr = argsIn[2];
 
-		new StatusBar().printProgressBar(all, current, barStr);
+		ProgressBar.printProgressBar(all, current, barStr);
 	}
 
-	public void printProgressBar(float all, float current, String barStr) {
+	public static void printProgressBar(float all, float current, String barStr) {
 		System.out.print(buildProgressBarStr(all, current, barStr));
 	}
 
-	private String buildProgressBarStr(float all, float current, String barStr) {
+	private static String buildProgressBarStr(float all, float current, String barStr) {
 		if (current > all) {
 			return "invalid";
 		}
