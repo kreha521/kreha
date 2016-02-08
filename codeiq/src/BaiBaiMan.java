@@ -3,6 +3,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+/***********************************
+ * Occures OutOfMemoryError。
+ ***********************************/
 class BaiBaiMan {
 	public static void main(String[] args) throws IOException {
 		List<Byte> bbm = new ArrayList<Byte>();
