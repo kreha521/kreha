@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /***********************************
- * Occures OutOfMemoryError。
+ * Occurs OutOfMemoryError。
  ***********************************/
 class BaiBaiMan {
 	public static void main(String[] args) throws IOException {
