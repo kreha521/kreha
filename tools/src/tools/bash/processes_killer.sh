@@ -1,7 +1,7 @@
 #!/bin/bash
 
 if [ $# -ne 1 -o "$1" = "root" -o "$1" = $(id -un) ]; then
-  echo "The argument is invalid!! Please specify a valid username to kill its processes."
+  echo "Invalid argument! Please specify a valid username to kill its processes."
   exit 1
 fi
 
