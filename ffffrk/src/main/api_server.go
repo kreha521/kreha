@@ -22,6 +22,7 @@ func routeCharacters(router *gin.Engine) {
 	router.GET("/characters", func(c *gin.Context) {
 		err, characters := ref.GetCharacters()
 		if (err != nil) {
+			panic(err)
 			c.JSON(http.StatusBadRequest, gin.H{"status": "BadRequest"})
 			return
 		}
@@ -31,6 +32,7 @@ func routeCharacters(router *gin.Engine) {
 	router.GET("/characters/:id", func(c *gin.Context) {
 		err, character := ref.GetCharacter(c.Param("id"))
 		if (err != nil) {
+			panic(err)
 			c.JSON(http.StatusBadRequest, gin.H{"status": "BadRequest"})
 			return
 		}
@@ -39,13 +41,15 @@ func routeCharacters(router *gin.Engine) {
 
 	router.POST("/characters", func(c *gin.Context) {
 		if err := c.BindJSON(&dto); err != nil {
-			c.JSON(http.StatusBadRequest, gin.H{"status": "BadRequest"})
+			panic(err)
+			c.JSON(http.StatusBadRequest, gin.H{"status": "BadRequest:Failed to bind params"})
 			return
 		}
 
 		err, character := mainte.CreateCharacter(dto)
 		if (err != nil) {
-			c.JSON(http.StatusBadRequest, gin.H{"status": "BadRequest"})
+			panic(err)
+			c.JSON(http.StatusBadRequest, gin.H{"status": "BadRequest:Failed to create"})
 			return
 		}
 
