@@ -5,16 +5,38 @@ import (
 	"dto"
 )
 
-func GetCharacters() (error, []dto.FFCharacters) {
+func GetCharacters() (error, []dto.Character) {
+	var characters []dto.Character
 	err, conn := dao.GetConnection()
 	if (err != nil) {
 		return err, nil
 	}
 
-	var characters []dto.FFCharacters
-	conn.Table("characters").Find(&characters)
-//	conn.Table("characters").First(&characters, "1")
-	conn.Close()
+	if err := conn.Table("characters").Find(&characters).Error; err != nil {
+		return err, characters
+	}
+
+	if err := conn.Close(); err != nil {
+		return err, characters
+	}
 
 	return nil, characters
+}
+
+func GetCharacter(id string) (error, dto.Character) {
+	var character dto.Character
+	err, conn := dao.GetConnection()
+	if (err != nil) {
+		return err, character
+	}
+
+	if err := conn.Table("characters").First(&character, id).Error; err != nil {
+		return err, character
+	}
+
+	if err := conn.Close(); err != nil {
+		return err, character
+	}
+
+	return nil, character
 }

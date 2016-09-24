@@ -23,29 +23,37 @@ app.get("/characters", function(req, res) {
 
 	var request = require('request');
 	var options = {
-	  url: 'http://localhost:8080/characters',
-	  json: true
+		url: 'http://localhost:8080/characters',
+		json: true
 	};
 
 	request.get(options, function (error, response, body) {
-	  if (!error && response.statusCode == 200) {
-		    res.send(body)
-	  } else {
-	    console.log('error: '+ response.statusCode);
-	  }
+		if (!error && response.statusCode == 200) {
+			res.send(body)
+		} else {
+			console.log('error: '+ response.statusCode);
+		}
 	})
-//
-//  users.find().toArray(function(err, items) {
-//    res.send(items);
-//  });
 });
 
 // 個人取得
 app.get("/characters/:id", function(req, res) {
-	console.log('Get characters' + id);
-//  users.findOne({_id: mongodb.ObjectID(req.params._id)}, function(err, item) {
-//    res.send(item);
-//  });
+	
+	console.log('Get characters id:' + req.params.id);
+
+	var request = require('request');
+	var options = {
+		url: 'http://localhost:8080/characters/' + req.params.id,
+		json: true
+	};
+
+	request.get(options, function (error, response, body) {
+		if (!error && response.statusCode == 200) {
+			res.send(body)
+		} else {
+			console.log('error: '+ response.statusCode);
+		}
+	})
 });
 
 //// 追加・更新

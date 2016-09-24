@@ -8,7 +8,7 @@ angular.module('ffffrk')
 	$scope.characters = Characters.query();
 	$scope.register = function(){
 		var character = {
-				id:$scope.id
+			id:$scope.id
 			, job:$scope.job
 			, name:$scope.name
 		};

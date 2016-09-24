@@ -1,12 +1,11 @@
 package main
 
 import (
-	"fmt"
-	"encoding/json"
 	"net/http"
 	"github.com/gin-gonic/gin"
 	"dto"
 	"service/character/ref"
+	"service/character/mainte"
 )
 
 func main() {
@@ -18,7 +17,7 @@ func main() {
 }
 
 func routeCharacters(router *gin.Engine) {
-	var dto dto.FFCharacters
+	var dto dto.Character
 
 	router.GET("/characters", func(c *gin.Context) {
 		err, characters := ref.GetCharacters()
@@ -26,30 +25,31 @@ func routeCharacters(router *gin.Engine) {
 			c.JSON(http.StatusBadRequest, gin.H{"status": "BadRequest"})
 			return
 		}
-  bytes, _ := json.Marshal(characters)
-  fmt.Printf("%s", bytes)
 		c.JSON(http.StatusOK, characters)
 	})
 
 	router.GET("/characters/:id", func(c *gin.Context) {
+		err, character := ref.GetCharacter(c.Param("id"))
+		if (err != nil) {
+			c.JSON(http.StatusBadRequest, gin.H{"status": "BadRequest"})
+			return
+		}
+		c.JSON(http.StatusOK, character)
 	})
 
-	router.POST("/", func(c *gin.Context) {
+	router.POST("/characters", func(c *gin.Context) {
 		if err := c.BindJSON(&dto); err != nil {
 			c.JSON(http.StatusBadRequest, gin.H{"status": "BadRequest"})
 			return
 		}
 
-		
-		//		var form ContactForm
-//		c.BindWith(&form, binding.Form)
-//		c.String(200, "Name: " + form.Name + "\nMessage: " + form.Message + "\n")
-	})
+		err, character := mainte.CreateCharacter(dto)
+		if (err != nil) {
+			c.JSON(http.StatusBadRequest, gin.H{"status": "BadRequest"})
+			return
+		}
 
-	router.POST("/json", func(c *gin.Context) {
-//		var json ContactJSON
-//		c.BindWith(&json, binding.JSON)
-//		c.String(200, "Name: " + json.Name + "\nMessage: " + json.Message + "\n")
+		c.JSON(http.StatusOK, character)
 	})
 }
 

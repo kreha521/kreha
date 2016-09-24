@@ -14,15 +14,17 @@ func GetConnection() (error, *gorm.DB) {
 	return err, db
 }
 
-func BeginTransaction() *gorm.DB {
+func BeginTransaction() (error, *gorm.DB) {
 	tx := db.Begin()
-	return tx
+	return tx.Error, tx
 }
 
-func Commit() {
-	tx.Commit()
+func Commit() (error, *gorm.DB) {
+	tx := db.Commit()
+	return tx.Error, tx
 }
 
-func Roolback() {
-	tx.Rollback()
+func Roolback() (error, *gorm.DB) {
+	tx := db.Rollback()
+	return tx.Error, tx
 }

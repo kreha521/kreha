@@ -4,6 +4,6 @@ import (
 	"entity"
 )
 
-type FFCharacters struct {
+type Character struct {
 	entity.Characters
 }
