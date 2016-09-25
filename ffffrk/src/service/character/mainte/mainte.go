@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"dao"
 	"dto"
-	"service/character/ref"
 	"github.com/jinzhu/gorm"
 	_ "github.com/lib/pq"
 	_ "github.com/go-sql-driver/mysql"
@@ -37,11 +36,13 @@ func CreateCharacter(character dto.Character) (error, dto.Character) {
 		fmt.Println("getlastid")
 		return err, newCharacter
 	}
-newId = "15"
-	if err, newCharacter = ref.GetCharacter(newId); err != nil {
+
+	if err, newCharacter = GetNewCharacter(newId, conn); err != nil {
 		fmt.Println("getlastdata:" + newId)
 		return err, newCharacter
 	}
+
+	fmt.Println(newCharacter)
 
 	conn.Commit();
 
@@ -67,4 +68,17 @@ func getLastInsertId(conn *gorm.DB) (error, string) {
 		rows.Scan(&last)
 	}
 	return nil, last
+}
+
+func GetNewCharacter(id string, conn *gorm.DB) (error, dto.Character) {
+	var character dto.Character
+	if err := conn.Table("characters").First(&character, id).Error; err != nil {
+		return err, character
+	}
+
+	if err := conn.Close(); err != nil {
+		return err, character
+	}
+
+	return nil, character
 }

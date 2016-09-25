@@ -13,7 +13,7 @@ type ModInfo struct {
 
 type Characters struct {
 	Exclution
-	Id		int 	`form:"id" json:"id" gorm:"column:id;primary_key"`
+	Id		int 	`form:"id" json:"id" gorm:"column:id;primary_key;auto_increment"`
 	Name	string	`form:"name" json:"name" gorm:"column:name;type:varchar(30)"`
 	Job		string	`form:"job" json:"job" gorm:"column:job;type:varchar(30)"`
 	ModInfo
