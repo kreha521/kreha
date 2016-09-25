@@ -37,7 +37,7 @@ func CreateCharacter(character dto.Character) (error, dto.Character) {
 		fmt.Println("getlastid")
 		return err, newCharacter
 	}
-
+newId = "15"
 	if err, newCharacter = ref.GetCharacter(newId); err != nil {
 		fmt.Println("getlastdata:" + newId)
 		return err, newCharacter
