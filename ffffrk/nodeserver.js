@@ -23,7 +23,7 @@ app.get("/characters", function(req, res) {
 
 	var request = require('request');
 	var options = {
-		url: 'http://localhost:8080/characters',
+		url: 'http://localhost:10000/characters',
 		json: true
 	};
 
@@ -43,7 +43,7 @@ app.get("/characters/:id", function(req, res) {
 
 	var request = require('request');
 	var options = {
-		url: 'http://localhost:8080/characters/' + req.params.id,
+		url: 'http://localhost:10000/characters/' + req.params.id,
 		json: true
 	};
 
@@ -56,14 +56,22 @@ app.get("/characters/:id", function(req, res) {
 	})
 });
 
-//// 追加・更新
-//app.post("/api/users", function(req, res) {
-//  var user = req.body;
-//  if (user._id) user._id = mongodb.ObjectID(user._id);
-//  users.save(user, function() {
-//    res.send("insert or update");
-//  });
-//});
+// 追加・更新
+app.post("/characters", function(req, res) {
+	var request = require('request');
+	var options = {
+		url: 'http://localhost:10000/characters',
+		json: true
+	};
+
+	request.post(options, function (error, response, body) {
+		if (!error && response.statusCode == 200) {
+			res.send(body)
+		} else {
+			console.log('error: '+ response.statusCode);
+		}
+	})
+});
 //
 //// 削除
 //app.delete("/api/users/:_id", function(req, res) {

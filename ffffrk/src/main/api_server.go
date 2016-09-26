@@ -13,7 +13,7 @@ func main() {
 
 	routeCharacters(router)
 
-	router.Run(":8080")
+	router.Run(":10000")
 }
 
 func routeCharacters(router *gin.Engine) {
