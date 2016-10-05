@@ -28,6 +28,7 @@ app.get("/characters", function(req, res) {
 	};
 
 	request.get(options, function (error, response, body) {
+		console.log(response);
 		if (!error && response.statusCode == 200) {
 			res.send(body)
 		} else {
@@ -58,19 +59,22 @@ app.get("/characters/:id", function(req, res) {
 
 // 追加・更新
 app.post("/characters", function(req, res) {
+	console.log(req);
 	var request = require('request');
 	var options = {
-		url: 'http://localhost:10000/characters',
-		json: true
+		url: "http://localhost:10000/characters",
+	  headers: {
+	    "Content-type": "application/json",
+	  },
+	  json: req.body
 	};
-
-	request.post(options, function (error, response, body) {
+	request.post(options, function(error, response, body){
 		if (!error && response.statusCode == 200) {
 			res.send(body)
 		} else {
 			console.log('error: '+ response.statusCode);
 		}
-	})
+	});
 });
 //
 //// 削除

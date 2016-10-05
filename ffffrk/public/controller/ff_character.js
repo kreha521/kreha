@@ -1,14 +1,14 @@
 angular.module('ffffrk')
 
-.service('Characters', function($resource) {
+.factory('Characters', function($resource) {
 	return $resource('http://localhost:3000/characters');
 })
 
-.service('Character', function($resource) {
-	return $resource('http://localhost:3000/characters/26');
-})
+//.service('Character', function($resource) {
+//	return $resource('http://localhost:3000/characters/26');
+//})
 
-.controller('CharacterCtrl', function($scope, $http, Characters, Character){
+.controller('CharacterCtrl', function($scope, $http, Characters){
 	$scope.characters = Characters.query();
 //	$scope.character = Character.get();
 //	console.log($scope.character.m.id);
@@ -22,19 +22,30 @@ angular.module('ffffrk')
 
         var config = {
                 headers : {
-                    'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8;'
+                    'Content-Type': 'application/json;'
                 }
             }
         
-        $http.post('http://localhost:10000/characters', character, config)
+        $http.post('http://localhost:3000/characters', character, config)
         .success(function (data, status, headers, config) {
-            alert("suc")
         })
         .error(function (data, status, header, config) {
-            alert("fail")
         });
-		$scope.characters.push();
+		$scope.characters.push(character);
 	};
+})
+
+.directive('singleByteValidator',function(){
+    return{
+        restrict: "A",
+        require: "ngModel",
+        link: function(scope,element,attrs,ngModel){
+            ngModel.$validators.singleByte = function(modelValue,viewValue){
+                var value = modelValue || viewValue;
+                return /^[\x20-\x7E]+$/.test(value);
+            }
+        }
+    }
 })
 
 ;

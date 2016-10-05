@@ -18,10 +18,12 @@
 
     <form novalidate name="character">
         <div class="form-group">
-            <input name="id" ng-model="id" placeholder="ID">
+            <input required name="id" ng-model="id" placeholder="ID" single-byte-validator>
             <input name="job" ng-model="job" placeholder="ジョブ">
             <input name="name" ng-model="name" placeholder="名前">
             <button ng-click="register()">登録</button>
         </div>
+        <span ng-show="character.id.$error.singleByte">name contain only lowercharactors.</span>
     </form>
+ <br><br><br><br><br><br>
 </div>
