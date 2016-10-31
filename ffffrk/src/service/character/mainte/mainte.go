@@ -4,8 +4,6 @@ import (
 	"fmt"
 	"dao"
 	"dto"
-	"log"
-	"os"
 	"github.com/jinzhu/gorm"
 	_ "github.com/lib/pq"
 	_ "github.com/go-sql-driver/mysql"
@@ -26,17 +24,6 @@ func CreateCharacter(character dto.Character) (error, dto.Character) {
 		fmt.Println("begin")
 		return err, newCharacter
 	}
-
-// ＤＢＩＯログ出力
-logfile, err := os.OpenFile("./test.log", os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0666)
-if err != nil {
-    panic("cannnot open test.log:" + err.Error())
-}
-defer logfile.Close()
-
-conn.LogMode(true)
-conn.SetLogger(log.New(logfile, "\r\n", 0))
-
 
 	if err := conn.Table("characters").Create(&character).Error; err != nil {
 		fmt.Println("create")

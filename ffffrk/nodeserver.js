@@ -28,7 +28,6 @@ app.get("/characters", function(req, res) {
 	};
 
 	request.get(options, function (error, response, body) {
-		console.log(response);
 		if (!error && response.statusCode == 200) {
 			res.send(body)
 		} else {

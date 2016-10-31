@@ -1,6 +1,0 @@
-Nodeの例外処理ってこんなのかなぁ。
-http://dev.classmethod.jp/server-side/domain/
-
-サービスを順に呼ぶのはasyncかな？
-http://ameblo.jp/ca-1pixel/entry-11476850674.html
-
