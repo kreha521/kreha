@@ -3,6 +3,9 @@ package ref
 import (
 	"dao"
 	"dto"
+	"log"
+	"os"
+
 )
 
 func GetCharacters() (error, []dto.Character) {
@@ -11,6 +14,16 @@ func GetCharacters() (error, []dto.Character) {
 	if (err != nil) {
 		return err, nil
 	}
+
+//// ＤＢＩＯログ出力
+logfile, err := os.OpenFile("./test.log", os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0666)
+if err != nil {
+    panic("cannnot open test.log:" + err.Error())
+}
+defer logfile.Close()
+
+conn.LogMode(true)
+conn.SetLogger(log.New(logfile, "\r\n", 0))
 
 	if err := conn.Table("characters").Find(&characters).Error; err != nil {
 		return err, characters
@@ -29,6 +42,16 @@ func GetCharacter(id string) (error, dto.Character) {
 	if (err != nil) {
 		return err, character
 	}
+
+//// ＤＢＩＯログ出力
+logfile, err := os.OpenFile("./test.log", os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0666)
+if err != nil {
+    panic("cannnot open test.log:" + err.Error())
+}
+defer logfile.Close()
+
+conn.LogMode(true)
+conn.SetLogger(log.New(logfile, "\r\n", 0))
 
 	if err := conn.Table("characters").First(&character, id).Error; err != nil {
 		return err, character
