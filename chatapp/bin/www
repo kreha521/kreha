@@ -65,8 +65,12 @@ var io = require("socket.io").listen(server);
 // ユーザ管理ハッシュ
 var userHash = {};
 
+app.set('socketio', io);
+
 // 2.イベントの定義
 io.sockets.on("connection", function (socket) {
+//socket.join(socket.id);
+
 console.log("connection kita!");
   // 接続開始カスタムイベント(接続元ユーザを保存し、他ユーザへ通知)
   socket.on("connected", function (name) {
@@ -77,7 +81,7 @@ console.log("connection kita!");
 
   // メッセージ送信カスタムイベント
   socket.on("publish", function (data) {
-    io.sockets.emit("publish", {value:data.value});
+    io.sockets.emit("pushStatus", {value:data.value});
   });
 
   // 接続終了組み込みイベント(接続元ユーザを削除し、他ユーザへ通知)

@@ -13,7 +13,7 @@
     var socketio = io.connect('http://localhost:3000');
 
     socketio.on("connected", function(name) {});
-    socketio.on("publish", function (data) { addMessage(data.value); });
+    socketio.on("pushStatus", function (data) { addMessage(data.value); });
     socketio.on("disconnect", function () {});
 
     // 2.イベントに絡ませる関数の定義
