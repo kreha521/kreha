@@ -7,12 +7,6 @@ app.use('/', express.static(path.join(__dirname, 'public')));
 app.use(express.static('js'));
 app.use(bodyParser.json());
 
-app.listen(3000);
- 
-console.log('Server started: http://localhost:3000/');
-
-
-
 
 var users;
 
@@ -82,3 +76,5 @@ app.post("/characters", function(req, res) {
 //    res.send("delete");
 //  });
 //});
+
+module.exports = app;

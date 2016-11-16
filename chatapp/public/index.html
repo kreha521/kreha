@@ -10,7 +10,7 @@
   <script src="/socket.io/socket.io.js"></script>
   <script type="text/javascript">
     // 1.イベントとコールバックの定義
-    var socketio = io.connect('http://localhost:3000');
+    var socketio = io.connect('http://localhost:3000/psstat');
 
     socketio.on("connected", function(name) {});
     socketio.on("pushStatus", function (data) { addMessage(data.value); });
@@ -37,7 +37,7 @@
     // 3.開始処理
     var msgArea = document.getElementById("msg");
     var myName = Math.floor(Math.random()*100) + "さん";
-    addMessage("風のまーふが勢いよく入室しました");
+    addMessage("チャット開始");
     start(myName);
   </script>
 </body>

@@ -25,83 +25,39 @@ var server = http.createServer(app);
  * Listen on provided port, on all network interfaces.
  */
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 server.listen(port);
 server.on('error', onError);
 server.on('listening', onListening);
 
+/**
+ * WebSocketèª¿æŸ»ä¸­
+ */
 
-
-
-
-
-
-//1.ƒ‚ƒWƒ…[ƒ‹ƒIƒuƒWƒFƒNƒg‚Ì‰Šú‰»
 var fs = require("fs");
 var io = require("socket.io").listen(server);
 
-// ƒ†[ƒUŠÇ—ƒnƒbƒVƒ…
-var userHash = {};
-
 app.set('socketio', io);
+var socketio = app.get('socketio');
 
-// 2.ƒCƒxƒ“ƒg‚Ì’è‹`
-io.sockets.on("connection", function (socket) {
-//socket.join(socket.id);
+var psstat = socketio.of('/psstat');
 
-console.log("connection kita!");
-  // Ú‘±ŠJnƒJƒXƒ^ƒ€ƒCƒxƒ“ƒg(Ú‘±Œ³ƒ†[ƒU‚ğ•Û‘¶‚µA‘¼ƒ†[ƒU‚Ö’Ê’m)
-  socket.on("connected", function (name) {
-    var msg = "‚Ü[‚ª“üº‚µ‚Ü‚µ‚½" + "(" + name + ")";
-    userHash[socket.id] = name;
-    io.sockets.emit("publish", {value: msg});
-  });
-
-  // ƒƒbƒZ[ƒW‘—MƒJƒXƒ^ƒ€ƒCƒxƒ“ƒg
-  socket.on("publish", function (data) {
-    io.sockets.emit("pushStatus", {value:data.value});
-  });
-
-  // Ú‘±I—¹‘g‚İ‚İƒCƒxƒ“ƒg(Ú‘±Œ³ƒ†[ƒU‚ğíœ‚µA‘¼ƒ†[ƒU‚Ö’Ê’m)
-  socket.on("disconnect", function () {
-    if (userHash[socket.id]) {
-      var msg = userHash[socket.id] + "‚ª‘Şo‚µ‚Ü‚µ‚½";
-      delete userHash[socket.id];
-      io.sockets.emit("publish", {value: msg});
-    }
-  });
+psstat.on("connection", function (socket) {
+    console.log("on connection event!");
+    psstat.emit('pushStatus', {value:"å…¨å“¡ã«ãƒ—ãƒƒã‚·ãƒ¥é€ä¿¡"});
+    psstat.to(socket.id).emit('pushStatus', {value:socket.id + "ã•ã‚“ã«ãƒ—ãƒƒã‚·ãƒ¥é€ä¿¡"});
 });
 
+// emitterãŒã‚¨ãƒ©ãƒ¼ã§å‹•ã‹ãªã„ã€‚Redisã‚µãƒ¼ãƒç«‹ã¦ã‚ã£ã¦æ›¸ã„ã¦ã‚ã‚‹ã€‚ã€‚ã€‚ã©ã†ã—ã‚ã¨ã€‚ã€‚ã€‚
+// http://qiita.com/n0bisuke/items/c248af316ca3f27daf92
 
-
-
-
-
-
-
-
+//var io = require('socket.io').listen(server);
+//var redis = require('socket.io-redis'); //++ï¿½Ç‹L
+//io.adapter(redis({ host: 'localhost', port: 6379 })); //++ï¿½Ç‹L
+//
+//var emitter = require('socket.io-emitter')({ host: 'localhost', port: 6379 });
+//setInterval(function(){
+//	emitter.emit('pushStatus', {value:"testtt"});
+//}, 5000);
 
 /**
  * Normalize a port into a number, string, or false.
