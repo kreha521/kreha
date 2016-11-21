@@ -53,5 +53,5 @@ module.exports = function (socket) {
 	  .on('end', function() {
 	    connection.destroy(); //終了
 	  });
-  }, 100);
+  }, 5000);
 };
