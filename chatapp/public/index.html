@@ -1,44 +1,25 @@
-<html>
+<!doctype html>
+<html ng-app="ffffrk">
 <head>
-  <meta charset="UTF-8">
-  <title>まーふの独り言</title>
+    <meta charset="utf-8">
+    <title>FFRK</title>
+    <link rel="stylesheet" href="//getbootstrap.com/dist/css/bootstrap.css"/>
 </head>
-<body>
-  <input type="text" id="msg_input" style="width:200px;" />
-  <button onclick="publishMessage();">語る</button>
-  <div id="msg"></div>
+<body id="body">
+    <div class="container-fluid">
+        <div ng-view></div>
+    </div>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+
   <script src="/socket.io/socket.io.js"></script>
-  <script type="text/javascript">
-    // 1.イベントとコールバックの定義
-    var socketio = io.connect('http://localhost:3000/psstat');
-
-    socketio.on("connected", function(name) {});
-    socketio.on("pushStatus", function (data) { addMessage(data.value); });
-    socketio.on("disconnect", function () {});
-
-    // 2.イベントに絡ませる関数の定義
-    function start(name) {
-      socketio.emit("connected", name);
-    }
-
-    function publishMessage() {
-      var textInput = document.getElementById('msg_input');
-      var msg = "[" + myName + "] " + textInput.value;
-      socketio.emit("publish", {value: msg});
-      textInput.value = '';
-    }
-
-    function addMessage (msg) {
-      var domMeg = document.createElement('div');
-      domMeg.innerHTML = new Date().toLocaleTimeString() + ' ' + msg;
-      msgArea.appendChild(domMeg);
-    }
-
-    // 3.開始処理
-    var msgArea = document.getElementById("msg");
-    var myName = Math.floor(Math.random()*100) + "さん";
-    addMessage("チャット開始");
-    start(myName);
-  </script>
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/angular-route/angular-route.js"></script>
+    <script src="bower_components/angular-socket-io/socket.js"></script>
+    <script src="./app.js"></script>
+    <script src="./controller/services.js"></script>
+    <script src="./controller/ff_character.js"></script>
 </body>
 </html>

@@ -33,19 +33,23 @@ server.on('listening', onListening);
  * WebSocket調査中
  */
 
-var fs = require("fs");
+//var fs = require("fs");
 var io = require("socket.io").listen(server);
 
-app.set('socketio', io);
-var socketio = app.get('socketio');
+//Socket.io Communication
+io.sockets.on('connection', require('../routes/socket'));
 
-var psstat = socketio.of('/psstat');
-
-psstat.on("connection", function (socket) {
-    console.log("on connection event!");
-    psstat.emit('pushStatus', {value:"全員にプッシュ送信"});
-    psstat.to(socket.id).emit('pushStatus', {value:socket.id + "さんにプッシュ送信"});
-});
+//app.set('socketio', io);
+//var socketio = app.get('socketio');
+//
+//var psstat = socketio.of('/psstat');
+//psstat.emit('connection', {value:"全員にプッシュ送信"});
+//
+//psstat.on("pushStatus", function (socket) {
+//    console.log("on connection event!");
+//    psstat.emit('pushStatus', {value:"全員にプッシュ送信"});
+//    psstat.to(socket.id).emit('pushStatus', {value:socket.id + "さんにプッシュ送信"});
+//});
 
 // emitterがエラーで動かない。Redisサーバ立てろって書いてある。。。どうしろと。。。
 // http://qiita.com/n0bisuke/items/c248af316ca3f27daf92
