@@ -7,6 +7,10 @@ app.use('/', express.static(path.join(__dirname, 'public')));
 app.use(express.static('js'));
 app.use(bodyParser.json());
 
+app.listen(3000);
+
+console.log('Server started: http://localhost:3000/');
+
 
 var users;
 
@@ -52,7 +56,6 @@ app.get("/characters/:id", function(req, res) {
 
 // 追加・更新
 app.post("/characters", function(req, res) {
-	console.log(req);
 	var request = require('request');
 	var options = {
 		url: "http://localhost:10000/characters",

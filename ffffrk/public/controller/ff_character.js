@@ -15,9 +15,9 @@ angular.module('ffffrk')
 
 	$scope.register = function(){
 		var character = {
-			id:$scope.id
-			, job:$scope.job
-			, name:$scope.name
+			"id":$scope.id
+			, "job":$scope.job
+			, "name":$scope.name
 		};
 
         var config = {
@@ -26,12 +26,20 @@ angular.module('ffffrk')
                 }
             }
         
-        $http.post('http://localhost:3000/characters', character, config)
-        .success(function (data, status, headers, config) {
-        })
-        .error(function (data, status, header, config) {
-        });
-		$scope.characters.push(character);
+
+        $http({
+            method: 'POST',
+            url: 'http://localhost:3000/characters',
+            data: character
+          })
+          // 成功時の処理（ページにあいさつメッセージを反映）
+          .success(function(data, status, headers, config){
+          	$scope.characters = Characters.query();
+          })
+          // 失敗時の処理（ページにエラーメッセージを反映）
+          .error(function(data, status, headers, config){
+            $scope.result = '通信失敗！';
+          });
 	};
 })
 
