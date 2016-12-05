@@ -10,9 +10,12 @@ const sql = 'SELECT * FROM characters WHERE id = ?;';
 module.exports = function (socket) {
     console.log("socket start");
     
-  socket.emit('send:name', {
-    name: 'Bob'
-  });
+    socket.on('send:time', function (data) {
+	      console.log(data.time);
+			socket.emit('send:time', {
+			      time: 'initial send'
+			    });
+    });
 
   setInterval(function () {
   	var connection = mysql.createConnection({
