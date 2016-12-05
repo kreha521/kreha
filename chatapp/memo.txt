@@ -1,2 +1,7 @@
 appéQè∆
 http://lealog.hateblo.jp/entry/2013/01/08/010232
+
+
+
+req.io
+http://stackoverflow.com/questions/29334800/express-js-4-and-sockets-with-express-router
