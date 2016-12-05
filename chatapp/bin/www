@@ -37,7 +37,8 @@ server.on('listening', onListening);
 var io = require("socket.io").listen(server);
 
 //Socket.io Communication
-io.of('psmonitor').on('connection', require('../websocket/socket'));
+var psmonitor = require('../websocket/socket');
+io.of('psmonitor').on('connection', psmonitor.onSocket);
 
 //app.set('socketio', io);
 //var socketio = app.get('socketio');
