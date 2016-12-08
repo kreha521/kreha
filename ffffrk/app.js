@@ -72,12 +72,12 @@ app.post("/characters", function(req, res) {
 		}
 	});
 });
-//
-//// 削除
-//app.delete("/api/users/:_id", function(req, res) {
-//  users.remove({_id: mongodb.ObjectID(req.params._id)}, function() {
-//    res.send("delete");
-//  });
-//});
+
+// 削除
+app.delete("/characters/:id", function(req, res) {
+  users.remove({_id: mongodb.ObjectID(req.params._id)}, function() {
+    res.send("delete");
+  });
+});
 
 module.exports = app;

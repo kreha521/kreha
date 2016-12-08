@@ -1,24 +1,31 @@
 angular.module('ffffrk')
 
 .factory('Characters', function($resource) {
-	return $resource('http://localhost:3000/characters');
+    return $resource('http://localhost:3000/characters');
 })
 
 //.service('Character', function($resource) {
-//	return $resource('http://localhost:3000/characters/26');
+//    return $resource('http://localhost:3000/characters/26');
 //})
 
 .controller('CharacterCtrl', function($scope, $http, Characters){
-	$scope.characters = Characters.query();
-//	$scope.character = Character.get();
-//	console.log($scope.character.m.id);
+    $scope.characters = Characters.query();
+//    $scope.character = Character.get();
+//    console.log($scope.character.m.id);
 
-	$scope.register = function(){
-		var character = {
-			"id":$scope.id
-			, "job":$scope.job
-			, "name":$scope.name
-		};
+    $scope.register = function($event){
+    	if ($scope.id == 1) {
+    		$scope.character.$invalid = true;
+    	}
+    	if ($scope.character.$invalid) {
+    		return;
+    	}
+console.log($event);
+    	var character = {
+            "id":$scope.id
+            , "job":$scope.job
+            , "name":$scope.name
+        };
 
         var config = {
                 headers : {
@@ -31,16 +38,28 @@ angular.module('ffffrk')
             method: 'POST',
             url: 'http://localhost:3000/characters',
             data: character
-          })
-          // 成功時の処理（ページにあいさつメッセージを反映）
-          .success(function(data, status, headers, config){
-          	$scope.characters = Characters.query();
-          })
-          // 失敗時の処理（ページにエラーメッセージを反映）
-          .error(function(data, status, headers, config){
+        })
+            // 成功時の処理（ページにあいさつメッセージを反映）
+            .success(function(data, status, headers, config){
+            $scope.characters = Characters.query();
+        })
+            // 失敗時の処理（ページにエラーメッセージを反映）
+            .error(function(data, status, headers, config){
             $scope.result = '通信失敗！';
-          });
-	};
+        });
+    };
+
+    $scope.delete = function($event){
+    	if ($scope.character.$invalid) {
+    		return;
+    	}
+    	var character = {
+            "id":$scope.id
+            , "job":$scope.job
+            , "name":$scope.name
+        };
+        console.log($event);
+    };
 })
 
 .directive('singleByte',function(){
@@ -51,7 +70,7 @@ angular.module('ffffrk')
             ngModel.$validators.singleByte = function(modelValue,viewValue){
                 var value = modelValue || viewValue;
                 if  (!value) {
-                	return true;
+                    return true;
                 }
                 return /^[\x20-\x7E]*$/.test(value);
             }
@@ -67,7 +86,7 @@ angular.module('ffffrk')
             ngModel.$validators.number = function(modelValue,viewValue){
                 var value = modelValue || viewValue;
                 if  (!value) {
-                	return true;
+                    return true;
                 }
                 return /^[0-9]*$/.test(value);
             }
@@ -84,7 +103,7 @@ angular.module('ffffrk')
             ngModel.$validators.alphanumber = function(modelValue,viewValue){
                 var value = modelValue || viewValue;
                 if  (!value) {
-                	return true;
+                    return true;
                 }
                 return /^[0-9a-zA-Z]*$/.test(value);
             }
