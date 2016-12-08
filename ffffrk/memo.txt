@@ -2,3 +2,7 @@ APIサーバのモックか
 
 http://qiita.com/futoase/items/2859a60c8b240da70572
 http://www.codediesel.com/nodejs/how-to-create-a-mock-rest-api-for-testing-in-nodejs/
+
+
+
+C:\Windows\System32>json-server C:\Users\Masaaki\git\kreha\ffffrk\apimock\db.json --config C:\Users\Masaaki\git\kreha\ffffrk\apimock\json-server.json
