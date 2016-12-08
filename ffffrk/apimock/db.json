@@ -1,0 +1,14 @@
+{
+  "characters": [
+    {
+      "id": 1,
+      "job": "john",
+      "name": "doe"
+    },
+    {
+      "id": 2,
+      "job": "jane",
+      "name": "roe"
+    }
+  ]
+}

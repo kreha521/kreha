@@ -18,13 +18,12 @@
 
     <form novalidate name="character">
         <div class="form-group">
-            <input required name="id" ng-model="id" placeholder="ID" number>
+            <input name="id" ng-model="id" placeholder="ID">
             <input name="job" ng-model="job" placeholder="ジョブ">
             <input name="name" ng-model="name" placeholder="名前">
-            <button id="register" type='submit' ng-click="register($event)">登録</button>
-            <button id="delete" type='button' ng-click="delete($event)">削除</button>
+            <button id="register" type='submit' ng-click="register()">登録</button>
+            <button id="delete" type='button' ng-click="delete()">削除</button>
         </div>
-        <span ng-disable="character" ng-if="character.$submitted" ng-show="character.$invalid">name contain only lowercharactors.</span>
     </form>
  <br><br><br><br><br><br>
 </div>

@@ -13,15 +13,12 @@ angular.module('ffffrk')
 //    $scope.character = Character.get();
 //    console.log($scope.character.m.id);
 
-    $scope.register = function($event){
-    	if ($scope.id == 1) {
-    		$scope.character.$invalid = true;
-    	}
+    $scope.register = function(){
     	if ($scope.character.$invalid) {
     		return;
     	}
-console.log($event);
-    	var character = {
+
+   	var character = {
             "id":$scope.id
             , "job":$scope.job
             , "name":$scope.name
@@ -49,7 +46,7 @@ console.log($event);
         });
     };
 
-    $scope.delete = function($event){
+    $scope.delete = function(){
     	if ($scope.character.$invalid) {
     		return;
     	}

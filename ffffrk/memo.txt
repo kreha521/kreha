@@ -1,0 +1,4 @@
+APIサーバのモックか
+
+http://qiita.com/futoase/items/2859a60c8b240da70572
+http://www.codediesel.com/nodejs/how-to-create-a-mock-rest-api-for-testing-in-nodejs/
