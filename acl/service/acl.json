@@ -1,4 +1,0 @@
-[
-    {"/users/get":["privilege", "admin", "pm", "pl"]},
-    {"/users/add":["privilege", "admin"]}
-]
