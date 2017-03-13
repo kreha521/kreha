@@ -2,7 +2,7 @@ angular.module('ffffrk')
 
 .controller('ChatCtrl', function ($scope, socket) {	
     $scope.voices = [];
-    $scope.name = "";
+    $scope.name = "Me";
 
     socket.on('say', function (data) {
         $scope.voices.push(data.voice);

@@ -1,7 +1,7 @@
 angular.module('ffffrk')
 
 .factory('socket', ['$rootScope', function($rootScope) {
-  var socket = io.connect('http://localhost:3000/psmonitor');
+  var socket = io.connect('http://localhost:3000/psmonitor',  { transports: [ 'websocket' ] });
 
   return {
     on: function(eventName, callback){
