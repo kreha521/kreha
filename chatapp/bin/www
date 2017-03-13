@@ -40,30 +40,6 @@ var io = require("socket.io").listen(server);
 var psmonitor = require('../websocket/socket');
 io.of('psmonitor').on('connection', psmonitor.onSocket);
 
-//app.set('socketio', io);
-//var socketio = app.get('socketio');
-//
-//var psstat = socketio.of('/psstat');
-//psstat.emit('connection', {value:"全員にプッシュ送信"});
-//
-//psstat.on("pushStatus", function (socket) {
-//    console.log("on connection event!");
-//    psstat.emit('pushStatus', {value:"全員にプッシュ送信"});
-//    psstat.to(socket.id).emit('pushStatus', {value:socket.id + "さんにプッシュ送信"});
-//});
-
-// emitterがエラーで動かない。Redisサーバ立てろって書いてある。。。どうしろと。。。
-// http://qiita.com/n0bisuke/items/c248af316ca3f27daf92
-
-//var io = require('socket.io').listen(server);
-//var redis = require('socket.io-redis'); //++�ǋL
-//io.adapter(redis({ host: 'localhost', port: 6379 })); //++�ǋL
-//
-//var emitter = require('socket.io-emitter')({ host: 'localhost', port: 6379 });
-//setInterval(function(){
-//	emitter.emit('pushStatus', {value:"testtt"});
-//}, 5000);
-
 /**
  * Normalize a port into a number, string, or false.
  */
