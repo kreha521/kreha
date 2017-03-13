@@ -10,14 +10,21 @@ const sql = 'SELECT * FROM characters WHERE id = ?;';
 module.exports = {
 	onSocket: function (socket) {
 	    console.log("socket start");
-	    
-	    socket.on('send:time', function (data) {
-		      console.log(data.time);
-				socket.emit('send:time', {
-				      time: 'initial send'
-				    });
+
+	    socket.on('startChat', function (data) {
+            console.log(data.name);
+            socket.emit('startChat', {
+                voice: 'Hello, ' + data.name
+            });
 	    });
-	
+
+        socket.on('say', function (data) {
+            console.log(data.name + ":" + data.voice);
+            socket.emit('reply', {
+                voice: data.name + ":" + data.voice
+            });
+	    });
+
 	  setInterval(function () {
 	  	var connection = mysql.createConnection({
 			  host     : 'localhost', //接続先ホスト
@@ -41,16 +48,10 @@ module.exports = {
 	
 		  //結果用
 		  .on('result', function(rows) {
-			console.log(rows.name);
-			if (rows.name != "Teeda") {
-				socket.emit('send:time', {
-			      time: rows.name
-			    });
-			} else {
-				socket.emit('send:time', {
-			      time: "normal"
-			    });
-			}
+            console.log(rows.name);
+            socket.emit('say', {
+              voice: rows.name
+            });
 		  })
 	
 		  //終わったよう～

@@ -1,4 +1,10 @@
 <div ng-controller="ChatCtrl">
-    <div>{{time}}</div>
-    <button type="submit" ng-click="startChat()">Start Chat</button>
+    <input type="text" name="name" ng-model="name" maxlength="10" placeholder="Your name">
+    <input type="text" name="voice" ng-model="voice" maxlength="50" placeholder="Say something">
+
+    <div ng-repeat="voice in voices track by $index">
+        {{voice}}
+    </div>
+
+    <button type="submit" ng-click="say()">Start Chat</button>
 </div>
