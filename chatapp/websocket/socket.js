@@ -13,7 +13,7 @@ module.exports = {
 
 	    socket.on('startChat', function (data) {
             console.log(data.name);
-            socket.emit('startChat', {
+            socket.emit('reply', {
                 voice: 'Hello, ' + data.name
             });
 	    });
